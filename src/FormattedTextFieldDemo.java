@@ -29,7 +29,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-package components;
+
 
 import java.awt.*;
 import java.awt.event.*;
@@ -53,12 +53,8 @@ import java.text.*;
  */
 public class FormattedTextFieldDemo extends JPanel
                                     implements PropertyChangeListener {
-    //Values for the fields
-    private double amount = 100000;
-    private double rate = 7.5;  //7.5%
-    private int numPeriods = 30;
-
-    //Labels to identify the fields
+    private FormattedTextFieldDemoData data = new FormattedTextFieldDemoData(100000, 7.5, 30);
+	//Labels to identify the fields
     private JLabel amountLabel;
     private JLabel rateLabel;
     private JLabel numPeriodsLabel;
@@ -84,9 +80,9 @@ public class FormattedTextFieldDemo extends JPanel
     public FormattedTextFieldDemo() {
         super(new BorderLayout());
         setUpFormats();
-        double payment = computePayment(amount,
-                                        rate,
-                                        numPeriods);
+        double payment = computePayment(data.amount,
+                                        data.rate,
+                                        data.numPeriods);
 
         //Create the labels.
         amountLabel = new JLabel(amountString);
@@ -96,17 +92,17 @@ public class FormattedTextFieldDemo extends JPanel
 
         //Create the text fields and set them up.
         amountField = new JFormattedTextField(amountFormat);
-        amountField.setValue(new Double(amount));
+        amountField.setValue(new Double(data.amount));
         amountField.setColumns(10);
         amountField.addPropertyChangeListener("value", this);
 
         rateField = new JFormattedTextField(percentFormat);
-        rateField.setValue(new Double(rate));
+        rateField.setValue(new Double(data.rate));
         rateField.setColumns(10);
         rateField.addPropertyChangeListener("value", this);
 
         numPeriodsField = new JFormattedTextField();
-        numPeriodsField.setValue(new Integer(numPeriods));
+        numPeriodsField.setValue(new Integer(data.numPeriods));
         numPeriodsField.setColumns(10);
         numPeriodsField.addPropertyChangeListener("value", this);
 
@@ -147,14 +143,14 @@ public class FormattedTextFieldDemo extends JPanel
     public void propertyChange(PropertyChangeEvent e) {
         Object source = e.getSource();
         if (source == amountField) {
-            amount = ((Number)amountField.getValue()).doubleValue();
+            data.amount = ((Number)amountField.getValue()).doubleValue();
         } else if (source == rateField) {
-            rate = ((Number)rateField.getValue()).doubleValue();
+            data.rate = ((Number)rateField.getValue()).doubleValue();
         } else if (source == numPeriodsField) {
-            numPeriods = ((Number)numPeriodsField.getValue()).intValue();
+            data.numPeriods = ((Number)numPeriodsField.getValue()).intValue();
         }
 
-        double payment = computePayment(amount, rate, numPeriods);
+        double payment = computePayment(data.amount, data.rate, data.numPeriods);
         paymentField.setValue(new Double(payment));
     }
 
