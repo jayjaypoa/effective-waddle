@@ -161,22 +161,33 @@ public class FormattedTextFieldDemo extends JPanel
     private static void criarMenu(JFrame frame){    	
         
         JMenuBar menuBar;
-        JMenu menu, submenu;     	
-    	
+        JMenu menuFile, menuHelp, submenu;     	
+    	JMenuItem menuItemExit = new JMenuItem("Exit");
+    	JMenuItem menuItemNew = new JMenuItem("New");
+    	JMenuItem menuItemAbout = new JMenuItem("About");
+        
+        
         //Create the menu bar.
         menuBar = new JMenuBar();
 
         //Build the first menu.
-        menu = new JMenu("A Menu");
-        menu.setMnemonic(KeyEvent.VK_A);
-        menu.getAccessibleContext().setAccessibleDescription(
-                "The only menu in this program that has menu items");
-        menuBar.add(menu);        
+        menuFile = new JMenu("File");
+        menuFile.setMnemonic(KeyEvent.VK_A);
+        menuFile.add(menuItemNew);
+        menuFile.addSeparator();
+        menuFile.add(menuItemExit);
+        // menuFile.getAccessibleContext().setAccessibleDescription( "The only menu in this program that has menu items");
+        menuBar.add(menuFile);        
+        
+        menuHelp = new JMenu("Help");
+        menuHelp.add(menuItemAbout);
+        menuBar.add(menuHelp); 
+        
         
         frame.setJMenuBar(menuBar);
     	
     }
-    
+       
     
     /**
      * Create the GUI and show it.  For thread safety,
