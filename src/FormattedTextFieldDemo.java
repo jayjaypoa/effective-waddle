@@ -53,12 +53,12 @@ import java.text.*;
  */
 public class FormattedTextFieldDemo extends JPanel
                                     implements PropertyChangeListener {
-    private FormattedTextFieldDemoData data = new FormattedTextFieldDemoData(100000, 7.5, 30);
+    private Dados data = new Dados(100000, 7.5, 30);
 	//Labels to identify the fields
     private JLabel amountLabel;
     private JLabel rateLabel;
     private JLabel numPeriodsLabel;
-    private JLabel paymentLabel;
+    private JLabel paymentLabel;   
 
     //Strings for the labels
     private static String amountString = "Loan Amount: ";
@@ -78,8 +78,11 @@ public class FormattedTextFieldDemo extends JPanel
     private NumberFormat paymentFormat;
 
     public FormattedTextFieldDemo() {
+    	
         super(new BorderLayout());
+        
         setUpFormats();
+        
         double payment = computePayment(data.amount,
                                         data.rate,
                                         data.numPeriods);
@@ -131,12 +134,13 @@ public class FormattedTextFieldDemo extends JPanel
         fieldPane.add(rateField);
         fieldPane.add(numPeriodsField);
         fieldPane.add(paymentField);
-
+        
         //Put the panels in this panel, labels on left,
         //text fields on right.
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         add(labelPane, BorderLayout.CENTER);
         add(fieldPane, BorderLayout.LINE_END);
+        
     }
 
     /** Called when a field's "value" property changes. */
@@ -154,6 +158,26 @@ public class FormattedTextFieldDemo extends JPanel
         paymentField.setValue(new Double(payment));
     }
 
+    private static void criarMenu(JFrame frame){    	
+        
+        JMenuBar menuBar;
+        JMenu menu, submenu;     	
+    	
+        //Create the menu bar.
+        menuBar = new JMenuBar();
+
+        //Build the first menu.
+        menu = new JMenu("A Menu");
+        menu.setMnemonic(KeyEvent.VK_A);
+        menu.getAccessibleContext().setAccessibleDescription(
+                "The only menu in this program that has menu items");
+        menuBar.add(menu);        
+        
+        frame.setJMenuBar(menuBar);
+    	
+    }
+    
+    
     /**
      * Create the GUI and show it.  For thread safety,
      * this method should be invoked from the
@@ -167,6 +191,8 @@ public class FormattedTextFieldDemo extends JPanel
         //Add contents to the window.
         frame.add(new FormattedTextFieldDemo());
 
+        criarMenu(frame);
+        
         //Display the window.
         frame.pack();
         frame.setVisible(true);

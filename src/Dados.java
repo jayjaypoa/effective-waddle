@@ -1,5 +1,5 @@
 
-public class FormattedTextFieldDemoData {
+public class Dados {
 	
 	public double amount;
 	public double rate;
@@ -29,7 +29,7 @@ public class FormattedTextFieldDemoData {
 		this.numPeriods = numPeriods;
 	}
 
-	public FormattedTextFieldDemoData(double amount, double rate, int numPeriods) {
+	public Dados(double amount, double rate, int numPeriods) {
 		this.amount = amount;
 		this.rate = rate;
 		this.numPeriods = numPeriods;
